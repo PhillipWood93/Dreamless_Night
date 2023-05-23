@@ -45,12 +45,19 @@ public partial class player : CharacterBody2D
     public override void _Process(double delta)
     {
         base._Process(delta);
-		if (Input.IsActionPressed("attack") && !_isAttacking && IsOnFloor())
+		if (Input.IsActionPressed("attack") && IsOnFloor())
 		{
 			_stateMachine.Travel("attack");
 			_isAttacking=true;
+			AttackOver();
 		}
     }
+
+	private async void AttackOver()
+	{
+		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);
+		_isAttacking = false;
+	}
 
     public override void _PhysicsProcess(double delta)
 	{
@@ -111,8 +118,11 @@ public partial class player : CharacterBody2D
 
 	private void OnAttack(Node2D body)
 	{
-		Health h = (Health)body.GetNode("Health");
-		h.SetHealth(h.health - damage);
+		if (body.IsInGroup("enemies"))
+		{
+			Health h = (Health)body.GetNode("Health");
+			h.SetHealth(h.health - damage);
+		}
 	}
 
 	private void OnHealthChanged()

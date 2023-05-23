@@ -116,4 +116,9 @@ public partial class EnemyBase : CharacterBody2D
 		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);
 		this.QueueFree();
 	}
+
+    private void OnScreenExited()
+	{
+		this.QueueFree();
+	}
 }

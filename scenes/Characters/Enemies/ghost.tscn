@@ -244,6 +244,7 @@ graph_offset = Vector2(25, 14)
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_llj47")
 hframes = 7
+frame = 3
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
