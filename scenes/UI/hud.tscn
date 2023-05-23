@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://gdaav88j1kvn"]
+
+[ext_resource type="Script" path="res://Scripts/Hud.cs" id="1_06kua"]
+[ext_resource type="Texture2D" uid="uid://c4rq118g6yn8s" path="res://Assets/HealthBarBackground.png" id="1_8x6xh"]
+[ext_resource type="Texture2D" uid="uid://n54i8yiftavr" path="res://Assets/HealthBarFill.png" id="2_udfu5"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_06kua")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 37.0
+offset_top = 30.0
+offset_right = 89.0
+offset_bottom = 37.0
+scale = Vector2(4, 4)
+value = 50.0
+texture_under = ExtResource("1_8x6xh")
+texture_progress = ExtResource("2_udfu5")
+texture_progress_offset = Vector2(1.1, 2)

@@ -11,8 +11,8 @@ public partial class portal : Area2D
 
 	[ExportSubgroup("Spawn Settings")]
 	[Export] private bool _isSpawner = true;
-	[Export(PropertyHint.Range, "1, 5")] private float _minSpawnRate = 1.0f;
-	[Export(PropertyHint.Range, "5, 10")] private float _maxSpawnRate = 5.0f;
+	[Export(PropertyHint.Range, "5, 10")] private float _minSpawnRate = 5.0f;
+	[Export(PropertyHint.Range, "10, 15")] private float _maxSpawnRate = 10.0f;
 	//This will take a random index from the array and spawn that creature...
 	[Export] private bool _randomSpawn = true;
 	[Export] private PackedScene[] _enemiesToSpawn;
@@ -30,9 +30,14 @@ public partial class portal : Area2D
 
     private void OnSpawnTimerTimeout()
 	{
-		GD.Print("Spawn");
-		SpawnRandomEnemy();
-		SpawnInSequance();
+		if (_randomSpawn)
+		{
+			SpawnRandomEnemy();
+		}
+		else
+		{
+			SpawnInSequance();
+		}
 	}
 
     public void OnBodyEntered(Node2D body)
@@ -45,7 +50,6 @@ public partial class portal : Area2D
 
 	private void SpawnRandomEnemy()
 	{
-		if(!_randomSpawn) { return; }
 		int i = GD.RandRange(0, _enemiesToSpawn.Length - 1);
 		Spawn(i);
 		CalculateRandomSpawnTime();
@@ -61,7 +65,6 @@ public partial class portal : Area2D
 	/// </summary>
 	private async void SpawnInSequance()
 	{
-		if (_randomSpawn) { return; }
 		for (int i = 0; i < _enemiesToSpawn.Length; ++i)
 		{
 			Spawn(i);

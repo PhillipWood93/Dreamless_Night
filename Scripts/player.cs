@@ -26,6 +26,7 @@ public partial class player : CharacterBody2D
 	private AnimationNodeStateMachinePlayback _stateMachine;
 	private Area2D _attackZone;
 	private Health _health;
+	private Hud _hud;
 
     public override void _Ready()
     {
@@ -34,12 +35,16 @@ public partial class player : CharacterBody2D
 		_health = (Health)GetNode("Health");
 		_health.OnHealthChanged += OnHealthChanged;
 
+
 		_attackZone = (Area2D)GetNode("AttackZone");
 		_attackZone.BodyEntered += OnAttack;
 
 		_animTree = (AnimationTree) GetNode("AnimationTree");
 		_animTree.Active = true;
         _stateMachine = (AnimationNodeStateMachinePlayback)_animTree.Get("parameters/playback");
+
+		_hud = (Hud)GetNode("Hud");
+		_hud.UpdateHealthBar(_health.health);
     }
 
     public override void _Process(double delta)
@@ -131,10 +136,12 @@ public partial class player : CharacterBody2D
 		{
 			Die();
 		}
+		_hud.UpdateHealthBar(_health.health);
 	}
 
 	private async void Die()
 	{
+		GD.Print("Dead");
 		_isDead = true;
 		_animTree.Set("parameters/conditions/isdead", _isDead);
 		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);

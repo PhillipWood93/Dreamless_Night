@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cnrym0alxxqp5"]
+[gd_scene load_steps=64 format=3 uid="uid://cnrym0alxxqp5"]
 
 [ext_resource type="Texture2D" uid="uid://b2srihuxoldgd" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_rn7mf"]
 [ext_resource type="Script" path="res://Scripts/player.cs" id="1_ujyew"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://qi3yctlu8pef" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Attack-01/Attack-01-Sheet.png" id="7_hbbrk"]
 [ext_resource type="Texture2D" uid="uid://ct72mjovo2mlj" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Dead/Dead-Sheet.png" id="8_h0snd"]
 [ext_resource type="PackedScene" uid="uid://ds1b7qy1hvylv" path="res://scenes/Components/health.tscn" id="8_i7ol6"]
+[ext_resource type="PackedScene" uid="uid://gdaav88j1kvn" path="res://scenes/UI/hud.tscn" id="10_yvt7y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v32c1"]
 height = 48.0
@@ -1037,3 +1038,5 @@ position = Vector2(34, 1)
 shape = SubResource("RectangleShape2D_w8n84")
 
 [node name="Health" parent="." instance=ExtResource("8_i7ol6")]
+
+[node name="Hud" parent="." instance=ExtResource("10_yvt7y")]

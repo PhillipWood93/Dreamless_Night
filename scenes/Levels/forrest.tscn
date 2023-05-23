@@ -1420,6 +1420,8 @@ sources/0 = SubResource("TileSetAtlasSource_wd4xl")
 position = Vector2(609, 170)
 scale = Vector2(5, 5)
 SceneToTranstion = ExtResource("2_w0wv1")
+_minSpawnRate = 3.123
+_maxSpawnRate = 8.246
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, 208)
