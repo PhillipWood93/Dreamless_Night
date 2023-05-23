@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://331h7osny0fl"]
+
+[ext_resource type="Texture2D" uid="uid://d4d5lmc7r0aay" path="res://Assets/Dark_Portal.png" id="1_44602"]
+[ext_resource type="Script" path="res://Scripts/portal.cs" id="1_tkrgq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rw32v"]
+radius = 7.0
+height = 16.0
+
+[node name="Portal" type="Area2D"]
+script = ExtResource("1_tkrgq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_44602")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_rw32v")
+
+[node name="SpawnTimer" type="Timer" parent="."]

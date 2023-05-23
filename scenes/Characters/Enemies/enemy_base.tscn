@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dib4vpmq0bwaa"]
+
+[ext_resource type="Script" path="res://scenes/Characters/Enemies/EnemyBase.cs" id="1_7p7mx"]
+[ext_resource type="PackedScene" uid="uid://ds1b7qy1hvylv" path="res://scenes/Components/health.tscn" id="2_n828e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ppe"]
+height = 40.0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7hs71"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iya24"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tsgeq"]
+size = Vector2(10, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q864d"]
+size = Vector2(10, 20)
+
+[node name="EnemyBase" type="CharacterBody2D"]
+script = ExtResource("1_7p7mx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t0ppe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_7hs71")
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_iya24")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DetectZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectZone"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_tsgeq")
+
+[node name="AttackZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_q864d")
+
+[node name="Health" parent="." instance=ExtResource("2_n828e")]
