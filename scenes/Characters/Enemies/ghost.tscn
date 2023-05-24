@@ -298,10 +298,13 @@ texture = ExtResource("2_llj47")
 hframes = 7
 
 [node name="DetectZone" parent="Sprite2D" index="0"]
-position = Vector2(-22, 12)
+position = Vector2(-29, 6)
+scale = Vector2(2.2689, 1.64894)
 
 [node name="AttackZone" parent="Sprite2D" index="1"]
-position = Vector2(-22, 12)
+position = Vector2(-29, 6)
+scale = Vector2(1.92263, 1.61725)
+monitoring = true
 
 [node name="TurnAroundNotify" parent="Sprite2D" index="2"]
 position = Vector2(-23, 16)

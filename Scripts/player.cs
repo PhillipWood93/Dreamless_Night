@@ -59,6 +59,10 @@ public partial class player : CharacterBody2D
 			_isAttacking=true;
 			AttackOver();
 		}
+		if (Input.IsActionPressed("quit"))
+		{
+			GetTree().Quit();
+		}
     }
 
 	private async void AttackOver()

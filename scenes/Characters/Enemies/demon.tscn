@@ -289,15 +289,15 @@ scale = Vector2(1.96, 2.92)
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_iyakw")
 hframes = 6
+frame = 1
 
 [node name="DetectZone" parent="Sprite2D" index="0"]
-position = Vector2(-82.9998, 43.0004)
-scale = Vector2(3.17144, 2.68368)
+position = Vector2(-82.9999, 31.0004)
+scale = Vector2(4.97144, 4.04368)
 
 [node name="AttackZone" parent="Sprite2D" index="1"]
-position = Vector2(-82.9998, 43.0004)
-scale = Vector2(3.17144, 2.68368)
-monitoring = false
+position = Vector2(-82.9999, 31.0004)
+scale = Vector2(4.89144, 4.00368)
 
 [node name="TurnAroundNotify" parent="Sprite2D" index="2"]
 position = Vector2(-76.9997, 66.0003)
