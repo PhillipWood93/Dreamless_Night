@@ -1,0 +1,322 @@
+[gd_scene load_steps=22 format=3 uid="uid://dit32u6pn0bne"]
+
+[ext_resource type="PackedScene" uid="uid://dib4vpmq0bwaa" path="res://scenes/Characters/Enemies/enemy_base.tscn" id="1_2egkd"]
+[ext_resource type="Texture2D" uid="uid://cli5eja8tj7pv" path="res://Assets/gothicvania patreon collection/demon-Files/PNG/demon-idle.png" id="2_iyakw"]
+[ext_resource type="AudioStream" uid="uid://ojtcmtasr808" path="res://Assets/SFX/demonDeath.wav" id="2_lcebt"]
+[ext_resource type="Texture2D" uid="uid://cvgkpvxdm61hp" path="res://Assets/gothicvania patreon collection/demon-Files/PNG/demon-attack.png" id="3_se3m4"]
+[ext_resource type="AudioStream" uid="uid://0gf4rv831mcx" path="res://Assets/SFX/demonAttack.wav" id="4_qyqpl"]
+
+[sub_resource type="Animation" id="Animation_y1anl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Demon/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_iyakw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Demon/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Demon/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Demon/AttackZone:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Demon:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Demon/Audio:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_qyqpl")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Demon/Audio:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ylmv8"]
+resource_name = "attack"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Demon/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_se3m4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Demon/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Demon/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.3, 1.5, 1.7, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Demon/AttackZone:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Demon/Audio:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_qyqpl")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Demon/Audio:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cq5mo"]
+resource_name = "death"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Demon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_nuhup"]
+resource_name = "idle"
+length = 0.95
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Demon/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_iyakw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Demon/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Demon/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wdtfw"]
+_data = {
+"RESET": SubResource("Animation_y1anl"),
+"attack": SubResource("Animation_ylmv8"),
+"death": SubResource("Animation_cq5mo"),
+"idle": SubResource("Animation_nuhup")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ily6f"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8pgsx"]
+animation = &"death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3c63p"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k57ca"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0eos"]
+advance_mode = 2
+advance_condition = &"isattacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1sq37"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uba4p"]
+advance_mode = 2
+advance_condition = &"isdead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ptexn"]
+advance_mode = 2
+advance_condition = &"isdead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mmud3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ks1vg"]
+states/Start/position = Vector2(291, 92)
+states/attack/node = SubResource("AnimationNodeAnimation_ily6f")
+states/attack/position = Vector2(669, 92)
+states/death/node = SubResource("AnimationNodeAnimation_8pgsx")
+states/death/position = Vector2(605, 155)
+states/idle/node = SubResource("AnimationNodeAnimation_3c63p")
+states/idle/position = Vector2(486, 92)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_k57ca"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_q0eos"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_1sq37"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_uba4p"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_ptexn"), "death", "End", SubResource("AnimationNodeStateMachineTransition_mmud3")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_po3sq"]
+
+[node name="Demon" instance=ExtResource("1_2egkd")]
+rotation = 6.28319
+damage = 30.0
+_deathSound = ExtResource("2_lcebt")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-14, 12)
+scale = Vector2(1.96, 2.92)
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_se3m4")
+hframes = 11
+frame = 5
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_wdtfw")
+}
+
+[node name="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeStateMachine_ks1vg")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_po3sq")
+parameters/conditions/isattacking = false
+parameters/conditions/isdead = false
+
+[node name="DetectZone" parent="." index="5"]
+position = Vector2(-72, 23)
+scale = Vector2(4.29009, 2.19798)
+
+[node name="AttackZone" parent="." index="6"]
+position = Vector2(-81, 47)
+scale = Vector2(7.09009, 3.11798)
+monitoring = false
+
+[node name="Health" parent="." index="7"]
+maxHealth = 400.0
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="8"]
+position = Vector2(-6, 5)
+scale = Vector2(7.75, 6.6)
+
+[node name="Audio" parent="." index="9"]
+stream = ExtResource("4_qyqpl")

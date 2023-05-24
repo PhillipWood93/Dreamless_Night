@@ -22,6 +22,5 @@ position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_rw32v")
 
 [node name="SpawnTimer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="timeout" from="SpawnTimer" to="." method="OnSpawnTimerTimeout"]

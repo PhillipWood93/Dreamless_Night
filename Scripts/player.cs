@@ -127,6 +127,7 @@ public partial class player : CharacterBody2D
 		{
 			Health h = (Health)body.GetNode("Health");
 			h.SetHealth(h.health - damage);
+			GD.Print(body.Name + " Has " + h.health);
 		}
 	}
 
@@ -141,10 +142,10 @@ public partial class player : CharacterBody2D
 
 	private async void Die()
 	{
-		GD.Print("Dead");
 		_isDead = true;
 		_animTree.Set("parameters/conditions/isdead", _isDead);
 		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);
+		ProcessMode = ProcessModeEnum.Disabled;
 		//TODO: Show GameOver Screen...
 	}
 }

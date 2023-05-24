@@ -12,32 +12,32 @@ public partial class EnemyBase : CharacterBody2D
 
 	[ExportCategory("Detection/Attacking")]
 	[Export]
-	public float attackRate { get; private set; } = .5f;
+	public float attackDuration { get; private set; } = 2.0f;
 
 	[Export]
 	public float damage { get; private set; } = 10.0f;
+
+	[ExportCategory("SFX/VFX")]
+	[Export]
+	private AudioStream _deathSound;
 
 	private bool _isAttacking = false;
 	
 	private bool _isDead = false;
 	private Health _health;
 
-	private Timer _attackTimer;
 	private Area2D _detectionZone;
 	private Area2D _attackZone;
 
 	private AnimationTree _animTree;
 	private AnimationNodeStateMachinePlayback _stateMachine;
 
+	private AudioStreamPlayer _audioPlayer;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_health = (Health)GetNode("Health");
 		_health.OnHealthChanged += OnHealthChanged;
-
-		_attackTimer = (Timer)GetNode("AttackTimer");
-		_attackTimer.Timeout += OnAttackTimeout;
-		_attackTimer.WaitTime = attackRate;
 
 		_detectionZone = (Area2D)GetNode("DetectZone");
 		_detectionZone.BodyEntered += StartAttack;
@@ -49,6 +49,8 @@ public partial class EnemyBase : CharacterBody2D
 		_animTree = (AnimationTree)GetNode("AnimationTree");
 		_animTree.Active = true;
 		_stateMachine = (AnimationNodeStateMachinePlayback)_animTree.Get("parameters/playback");
+
+		_audioPlayer = (AudioStreamPlayer)GetNode("Audio");
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -69,22 +71,22 @@ public partial class EnemyBase : CharacterBody2D
 
 	private void StartAttack(Node2D body)
 	{
-		if(body.Name == "Player")
+		if(body.Name == "Player" && !_isDead)
 		{
 			_isAttacking = true;
-			_attackTimer.Start();
-			_stateMachine.Travel("attack");
+			_animTree.Set("parameters/conditions/isattacking", _isAttacking);
 		}
 	}
 
-	private void StopAttack(Node2D body)
+	private async void StopAttack(Node2D body)
 	{
-		if (_isAttacking)
+		if(body.Name == "Player")
 		{
+			await ToSignal(GetTree().CreateTimer(attackDuration), Timer.SignalName.Timeout);
 			_isAttacking = false;
-			_attackTimer.Stop();
+			_animTree.Set("parameters/conditions/isattacking", false);
 			_stateMachine.Travel("idle");
-        }
+		}
 	}
 
 	private void OnAttack(Node2D other)
@@ -94,11 +96,6 @@ public partial class EnemyBase : CharacterBody2D
 			Health h = (Health)other.GetNode("Health");
 			h.SetHealth(h.health - damage);
 		}
-	}
-
-	private void OnAttackTimeout()
-	{
-		//GD.Print("Attack");
 	}
 
 	private void OnHealthChanged()
@@ -112,7 +109,9 @@ public partial class EnemyBase : CharacterBody2D
 	private async void Die()
 	{
 		_isDead = true;
+		_audioPlayer.Stream = _deathSound;
 		_animTree.Set("parameters/conditions/isdead", _isDead);
+		_audioPlayer.Play();
 		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);
 		this.QueueFree();
 	}

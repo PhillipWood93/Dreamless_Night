@@ -1,8 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://biwpq6foivapm"]
+[gd_scene load_steps=23 format=3 uid="uid://biwpq6foivapm"]
 
 [ext_resource type="PackedScene" uid="uid://dib4vpmq0bwaa" path="res://scenes/Characters/Enemies/enemy_base.tscn" id="1_uldlf"]
+[ext_resource type="AudioStream" uid="uid://b6ro2oryabqk1" path="res://Assets/SFX/ghostDeath.wav" id="2_hvnpl"]
 [ext_resource type="Texture2D" uid="uid://dsvc7oemeacgf" path="res://Assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-idle.png" id="2_llj47"]
 [ext_resource type="Texture2D" uid="uid://cescf3qgv1rkm" path="res://Assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-shriek.png" id="3_0vy67"]
+[ext_resource type="AudioStream" uid="uid://cnrk2t1t6uwge" path="res://Assets/SFX/ghostAttack.wav" id="4_cwa3j"]
 [ext_resource type="Texture2D" uid="uid://jeaxoarhqre7" path="res://Assets/gothicvania patreon collection/Ghost-Files/PNG/ghost-vanish.png" id="4_wcfl7"]
 
 [sub_resource type="Animation" id="Animation_650te"]
@@ -55,10 +57,33 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ghost/Audio:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_cwa3j")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Ghost/Audio:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_5kj6x"]
 resource_name = "attack"
-length = 0.75
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -91,7 +116,7 @@ tracks/2/path = NodePath("Ghost/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.5, 0.7),
+"times": PackedFloat32Array(0.1, 0.3, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -103,10 +128,34 @@ tracks/3/path = NodePath("Ghost/AttackZone:monitoring")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Ghost/Audio:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_cwa3j")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Ghost/Audio:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_0dd46"]
@@ -210,9 +259,10 @@ animation = &"idle"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4d54"]
+advance_mode = 2
+advance_condition = &"isattacking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fvo2q"]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qorsr"]
 advance_mode = 2
@@ -240,11 +290,12 @@ graph_offset = Vector2(25, 14)
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ovjrs"]
 
 [node name="Ghost" instance=ExtResource("1_uldlf")]
+attackDuration = 1.0
+_deathSound = ExtResource("2_hvnpl")
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_llj47")
-hframes = 7
-frame = 3
+texture = ExtResource("3_0vy67")
+hframes = 4
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
@@ -253,8 +304,8 @@ libraries = {
 
 [node name="AnimationTree" parent="." index="3"]
 tree_root = SubResource("AnimationNodeStateMachine_61hsb")
-active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ovjrs")
+parameters/conditions/isattacking = false
 parameters/conditions/isdead = false
 
 [node name="DetectZone" parent="." index="5"]
@@ -265,3 +316,6 @@ scale = Vector2(1.4, 1.4)
 position = Vector2(-25, 0)
 scale = Vector2(1.4, 1.4)
 monitoring = false
+
+[node name="Audio" parent="." index="9"]
+stream = ExtResource("4_cwa3j")

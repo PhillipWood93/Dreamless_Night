@@ -24,6 +24,7 @@ public partial class portal : Area2D
 	{
 		base._Ready();
 		SetProcess(false);
+		if (_isSpawner) _spawnTimer.Start();
 		_spawnTimer = (Timer)GetNode("SpawnTimer");
 		this.BodyEntered += this.OnBodyEntered;
 	}
