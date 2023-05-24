@@ -1104,16 +1104,16 @@ libraries = {
 "": SubResource("AnimationLibrary_ic8te")
 }
 
-[node name="AttackZone" type="Area2D" parent="."]
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
-position = Vector2(34, 1)
-shape = SubResource("RectangleShape2D_w8n84")
-
 [node name="Health" parent="." instance=ExtResource("8_i7ol6")]
 
 [node name="Hud" parent="." instance=ExtResource("10_yvt7y")]
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mgfm8")
+
+[node name="AttackZone" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
+position = Vector2(34, 1)
+shape = SubResource("RectangleShape2D_w8n84")

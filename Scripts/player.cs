@@ -27,12 +27,15 @@ public partial class player : CharacterBody2D
 	private Area2D _attackZone;
 	private Health _health;
 	private Hud _hud;
+	private Sprite2D _sprite;
 
     public override void _Ready()
     {
         base._Ready();
 
-		_health = (Health)GetNode("Health");
+        _sprite = (Sprite2D)GetNode("Sprite2D");
+
+        _health = (Health)GetNode("Health");
 		_health.OnHealthChanged += OnHealthChanged;
 
 
@@ -110,6 +113,7 @@ public partial class player : CharacterBody2D
         if (direction.X != 0)
 		{
 			velocity.X = direction.X * Speed;
+			_attackZone.Scale = new Vector2(direction.X, 1);
 		}
 		else
 		{

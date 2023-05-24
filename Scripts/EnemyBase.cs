@@ -33,17 +33,22 @@ public partial class EnemyBase : CharacterBody2D
 	private AnimationNodeStateMachinePlayback _stateMachine;
 
 	private AudioStreamPlayer _audioPlayer;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    private Vector2 velocity;
+	private bool _reachedEnd = false;
+
+    // Get the gravity from the project settings to be synced with RigidBody nodes.
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		_health = (Health)GetNode("Health");
 		_health.OnHealthChanged += OnHealthChanged;
 
-		_detectionZone = (Area2D)GetNode("DetectZone");
+		_detectionZone = (Area2D)GetNode("Sprite2D/DetectZone");
 		_detectionZone.BodyEntered += StartAttack;
 		_detectionZone.BodyExited += StopAttack;
 
-		_attackZone = (Area2D)GetNode("AttackZone");
+		_attackZone = (Area2D)GetNode("Sprite2D/AttackZone");
 		_attackZone.BodyEntered += OnAttack;
 
 		_animTree = (AnimationTree)GetNode("AnimationTree");
@@ -59,9 +64,13 @@ public partial class EnemyBase : CharacterBody2D
 
         base._PhysicsProcess(delta);
 
-		Vector2 velocity = Velocity;
+		velocity = Velocity;
+		
+        // Add the gravity.
+        if (!IsOnFloor())
+            velocity.Y += gravity * (float)delta;
 
-		if (!_isAttacking)
+        if (!_isAttacking)
 		{
 			velocity.X = speed * direction;
 			Velocity = velocity;
@@ -116,8 +125,19 @@ public partial class EnemyBase : CharacterBody2D
 		this.QueueFree();
 	}
 
+	private void OnAtTileMapEnd(Node2D other)
+	{
+		if(other.Name == "TileMap")
+		{
+			Sprite2D s = (Sprite2D)GetNode("Sprite2D");
+			s.Scale = new Vector2(-s.Scale.X, 1);
+			direction = -direction;
+		}
+	}
+
     private void OnScreenExited()
 	{
-		this.QueueFree();
+		//this.QueueFree();
 	}
+
 }

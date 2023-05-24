@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dib4vpmq0bwaa"]
+[gd_scene load_steps=9 format=3 uid="uid://dib4vpmq0bwaa"]
 
 [ext_resource type="Script" path="res://Scripts/EnemyBase.cs" id="1_wur3o"]
 [ext_resource type="PackedScene" uid="uid://ds1b7qy1hvylv" path="res://scenes/Components/health.tscn" id="2_n828e"]
@@ -6,15 +6,17 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0ppe"]
 height = 40.0
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7hs71"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iya24"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tsgeq"]
 size = Vector2(10, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q864d"]
 size = Vector2(10, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft5o8"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7hs71"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_iya24"]
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_wur3o")
@@ -23,6 +25,26 @@ script = ExtResource("1_wur3o")
 shape = SubResource("CapsuleShape2D_t0ppe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="DetectZone" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/DetectZone"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_tsgeq")
+
+[node name="AttackZone" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackZone"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_q864d")
+
+[node name="TurnAroundNotify" type="Area2D" parent="Sprite2D"]
+editor_description = "This node checks to see if the enemy is about to walk off the edge and turns them around.
+"
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/TurnAroundNotify"]
+shape = SubResource("RectangleShape2D_ft5o8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
@@ -35,18 +57,6 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_iya24")
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DetectZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectZone"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_tsgeq")
-
-[node name="AttackZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone"]
-position = Vector2(5, 0)
-shape = SubResource("RectangleShape2D_q864d")
-
 [node name="Health" parent="." instance=ExtResource("2_n828e")]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -55,4 +65,6 @@ scale = Vector2(2.05, 2.15)
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 
+[connection signal="area_exited" from="Sprite2D/TurnAroundNotify" to="." method="OnAtEndOfPlatform"]
+[connection signal="body_exited" from="Sprite2D/TurnAroundNotify" to="." method="OnAtTileMapEnd"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnScreenExited"]

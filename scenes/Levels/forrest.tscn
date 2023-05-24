@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://jr1muxwi0odv"]
+[gd_scene load_steps=9 format=3 uid="uid://jr1muxwi0odv"]
 
 [ext_resource type="AudioStream" uid="uid://ddqh70hrpjsdu" path="res://Assets/SFX/JDSherbert - Ambiences Music Pack - Desert Sirocco.wav" id="1_8pt2u"]
-[ext_resource type="PackedScene" uid="uid://331h7osny0fl" path="res://scenes/portal.tscn" id="1_i54j8"]
 [ext_resource type="Texture2D" uid="uid://c2gk5nu2vctsy" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Assets/Tiles.png" id="1_rwi0k"]
-[ext_resource type="PackedScene" uid="uid://rbifs5ko2m0k" path="res://scenes/Levels/ShadowCastle.tscn" id="2_w0wv1"]
 [ext_resource type="PackedScene" uid="uid://cnrym0alxxqp5" path="res://scenes/Characters/player.tscn" id="3_i3p2r"]
 [ext_resource type="PackedScene" uid="uid://biwpq6foivapm" path="res://scenes/Characters/Enemies/ghost.tscn" id="5_s05jm"]
+[ext_resource type="PackedScene" uid="uid://bt6fw5akvnefe" path="res://scenes/shadow_portal.tscn" id="6_bx36h"]
 [ext_resource type="PackedScene" uid="uid://bl0o248hxetld" path="res://scenes/Pickups/heart.tscn" id="6_o6kqe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wd4xl"]
@@ -1423,14 +1422,6 @@ stream = ExtResource("1_8pt2u")
 volume_db = -15.0
 autoplay = true
 
-[node name="Portal" parent="." instance=ExtResource("1_i54j8")]
-position = Vector2(609, 170)
-scale = Vector2(5, 5)
-SceneToTranstion = ExtResource("2_w0wv1")
-_isSpawner = false
-_minSpawnRate = 3.123
-_maxSpawnRate = 8.246
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, 208)
 tile_set = SubResource("TileSet_17vyt")
@@ -1440,8 +1431,11 @@ layer_0/tile_data = PackedInt32Array(65527, 65536, 1, 65528, 131072, 1, 65529, 1
 [node name="Player" parent="." instance=ExtResource("3_i3p2r")]
 position = Vector2(-27, 171)
 
-[node name="Ghost" parent="." instance=ExtResource("5_s05jm")]
-position = Vector2(443, 170)
-
 [node name="Heart" parent="." instance=ExtResource("6_o6kqe")]
 position = Vector2(338, 176)
+
+[node name="ShadowPortal" parent="." instance=ExtResource("6_bx36h")]
+position = Vector2(668, 164)
+
+[node name="Ghost" parent="." instance=ExtResource("5_s05jm")]
+position = Vector2(274, 175)
