@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://grr5mqfp33my"]
+
+[ext_resource type="Texture2D" uid="uid://cdjlnvycodly8" path="res://Assets/UI/Button.png" id="1_6tnmg"]
+[ext_resource type="Script" path="res://Scripts/PauseMenu.cs" id="1_urkua"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mlqwm"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_urkua")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.337255)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="TextureButton" parent="CenterContainer/ButtonContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture_normal = ExtResource("1_6tnmg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/ButtonContainer/ResumeButton"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 81.0
+offset_bottom = 41.0
+text = "Resume"
+label_settings = SubResource("LabelSettings_mlqwm")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="pressed" from="CenterContainer/ButtonContainer/ResumeButton" to="." method="OnResumePressed"]

@@ -16,6 +16,15 @@ public partial class Hud : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+    }
+
+	public void ShowPauseMenu()
+	{
+		bool p = GetTree().Paused;
+		GetTree().Paused = !p;
+		Control n = (Control)GetNode("PauseMenu");
+		n.Visible = p;
 	}
 
 	public void UpdateHealthBar(double value)

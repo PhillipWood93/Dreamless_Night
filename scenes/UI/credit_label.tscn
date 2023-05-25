@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh4om0jfg6swt"]
+
+[ext_resource type="Script" path="res://Scripts/CreditLabel.cs" id="1_kfs7c"]
+
+[node name="CreditLabel" type="Label"]
+custom_minimum_size = Vector2(900, 0)
+offset_right = 900.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Placeholder text "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("1_kfs7c")
+_speed = 100.0

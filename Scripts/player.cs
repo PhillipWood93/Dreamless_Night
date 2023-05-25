@@ -60,9 +60,9 @@ public partial class player : CharacterBody2D
 			_isAttacking=true;
 			AttackOver();
 		}
-		if (Input.IsActionPressed("quit"))
+		if (Input.IsActionPressed("pause"))
 		{
-			GetTree().Quit();
+			_hud.ShowPauseMenu();
 		}
 		if (Position.X < 0)
 		{

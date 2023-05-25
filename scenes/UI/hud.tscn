@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://gdaav88j1kvn"]
+[gd_scene load_steps=6 format=3 uid="uid://gdaav88j1kvn"]
 
 [ext_resource type="Script" path="res://Scripts/Hud.cs" id="1_06kua"]
 [ext_resource type="Texture2D" uid="uid://c4rq118g6yn8s" path="res://Assets/HealthBarBackground.png" id="1_8x6xh"]
 [ext_resource type="Texture2D" uid="uid://n54i8yiftavr" path="res://Assets/HealthBarFill.png" id="2_udfu5"]
 [ext_resource type="PackedScene" uid="uid://cx1b66un8nh6l" path="res://scenes/UI/Transtioner.tscn" id="4_3ddx1"]
+[ext_resource type="PackedScene" uid="uid://grr5mqfp33my" path="res://scenes/UI/pause_menu.tscn" id="5_j8x5l"]
 
 [node name="Hud" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_06kua")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
@@ -21,3 +23,7 @@ texture_progress_offset = Vector2(1.1, 2)
 
 [node name="Transtioner" parent="." instance=ExtResource("4_3ddx1")]
 process_mode = 3
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_j8x5l")]
+process_mode = 3
+visible = false

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://rybxsrqlqeqt"]
+
+[ext_resource type="PackedScene" uid="uid://cd02lsuxkbj64" path="res://scenes/background.tscn" id="1_ixoq3"]
+[ext_resource type="Script" path="res://Scripts/credits.cs" id="1_yq8qs"]
+[ext_resource type="PackedScene" uid="uid://bh4om0jfg6swt" path="res://scenes/UI/credit_label.tscn" id="3_nemiw"]
+
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_yq8qs")
+_creditLabelScene = ExtResource("3_nemiw")
+_vfxCredits = PackedStringArray("Artwork: created by Luis Zuno @ansimuz", "Artwork: Mounir Tohami", "Artwork: Phillip Wood")
+_sfxCredits = PackedStringArray("Music: Joshua \"JDSherbert\" Herbert", "SFX: LabChirp")
+
+[node name="Background" parent="." instance=ExtResource("1_ixoq3")]
+scale = Vector2(2.41019, 2.41019)
+
+[node name="CreditsOverTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="CreditLabel" parent="." instance=ExtResource("3_nemiw")]
+offset_left = 152.0
+offset_top = 651.0
+offset_right = 1052.0
+offset_bottom = 791.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 100
+text = "Credits"
+
+[connection signal="timeout" from="CreditsOverTimer" to="." method="OnTimeout"]

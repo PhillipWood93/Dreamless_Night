@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://rbifs5ko2m0k"]
+[gd_scene load_steps=10 format=3 uid="uid://rbifs5ko2m0k"]
 
 [ext_resource type="Texture2D" uid="uid://cj5bwe5r81nxu" path="res://Assets/gothicvania patreon collection/Old-dark-Castle-tileset-Files/PNG/old-dark-castle-interior-tileset.png" id="1_5f1ha"]
 [ext_resource type="PackedScene" uid="uid://cnrym0alxxqp5" path="res://scenes/Characters/player.tscn" id="2_w8t8v"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cqkqcghw3kko3" path="res://Assets/SFX/JDSherbert - Ambiences Music Pack - Dark Dark Woods.wav" id="4_nfnle"]
 [ext_resource type="PackedScene" uid="uid://dit32u6pn0bne" path="res://scenes/Characters/Enemies/demon.tscn" id="5_xbj50"]
 [ext_resource type="PackedScene" uid="uid://dwv33hl6mqlaq" path="res://scenes/earth_portal.tscn" id="6_udqoc"]
+[ext_resource type="PackedScene" uid="uid://rybxsrqlqeqt" path="res://scenes/UI/credits.tscn" id="7_irkd2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ghm2k"]
 texture = ExtResource("1_5f1ha")
@@ -883,3 +884,4 @@ position = Vector2(583, 121)
 
 [node name="EarthPortal" parent="." instance=ExtResource("6_udqoc")]
 position = Vector2(730, 147)
+SceneToTranstion = ExtResource("7_irkd2")
