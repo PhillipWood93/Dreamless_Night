@@ -3,6 +3,10 @@ using System;
 
 public partial class player : CharacterBody2D
 {
+
+	[Signal]
+	public delegate void HealthChangedEventHandler(float health);
+
 	[ExportSubgroup("Movement")]
 	[Export] 
 	public float Speed = 300.0f;
@@ -26,7 +30,6 @@ public partial class player : CharacterBody2D
 	private AnimationNodeStateMachinePlayback _stateMachine;
 	private Area2D _attackZone;
 	private Health _health;
-	private Hud _hud;
 	private Sprite2D _sprite;
 
     public override void _Ready()
@@ -45,10 +48,7 @@ public partial class player : CharacterBody2D
 		_animTree = (AnimationTree) GetNode("AnimationTree");
 		_animTree.Active = true;
         _stateMachine = (AnimationNodeStateMachinePlayback)_animTree.Get("parameters/playback");
-
-		_hud = (Hud)GetNode("Hud");
-		_hud.UpdateHealthBar(_health.health);
-		_hud.PlayTranstionIn();
+		EmitSignal(SignalName.HealthChanged, _health.health);
     }
 
     public override void _Process(double delta)
@@ -59,10 +59,6 @@ public partial class player : CharacterBody2D
 			_stateMachine.Travel("attack");
 			_isAttacking=true;
 			AttackOver();
-		}
-		if (Input.IsActionPressed("pause"))
-		{
-			_hud.ShowPauseMenu();
 		}
 		if (Position.X < 0)
 		{
@@ -140,7 +136,6 @@ public partial class player : CharacterBody2D
 		{
 			Health h = (Health)body.GetNode("Health");
 			h.SetHealth(h.health - damage);
-			GD.Print(body.Name + " Has " + h.health);
 		}
 	}
 
@@ -150,8 +145,8 @@ public partial class player : CharacterBody2D
 		{
 			Die();
 		}
-		_hud.UpdateHealthBar(_health.health);
-	}
+        EmitSignal(SignalName.HealthChanged, _health.health);
+    }
 
 	private async void Die()
 	{

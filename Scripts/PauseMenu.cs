@@ -16,6 +16,6 @@ public partial class PauseMenu : Control
 	private void OnResumePressed()
 	{
 		GetTree().Paused = false;
-		this.Hide();
+		this.Visible = false;
 	}
 }

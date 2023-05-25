@@ -18,7 +18,7 @@ public partial class portal : Area2D
 	[Export] private PackedScene[] _enemiesToSpawn;
 
 	private Timer _spawnTimer;
-
+	private Hud _hud;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,7 +26,9 @@ public partial class portal : Area2D
 		SetProcess(false);
 		if (_isSpawner) _spawnTimer.Start();
 		_spawnTimer = (Timer)GetNode("SpawnTimer");
-		this.BodyEntered += this.OnBodyEntered;
+		_hud = (Hud)this.GetParent().GetNode("Hud");	
+		
+        this.BodyEntered += this.OnBodyEntered;
 	}
 
     private void OnSpawnTimerTimeout()
@@ -45,9 +47,8 @@ public partial class portal : Area2D
 	{
 		if (body.Name == "Player")
 		{
-			//play transition out...
-			Hud h = (Hud)body.GetNode("Hud");
-			await h.PlayTranstionOut();
+			//play transition out...	
+			await _hud.PlayTranstionOut();
 			GetTree().ChangeSceneToPacked(SceneToTranstion);
 		}
 	}
