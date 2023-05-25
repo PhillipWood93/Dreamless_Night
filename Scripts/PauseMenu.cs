@@ -18,4 +18,9 @@ public partial class PauseMenu : Control
 		GetTree().Paused = false;
 		this.Visible = false;
 	}
+
+	private void OnQuitPressed()
+	{
+		GetTree().Quit();
+	}
 }
