@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://rxr8d01avnk8"]
+[gd_scene load_steps=6 format=3 uid="uid://rxr8d01avnk8"]
 
 [ext_resource type="Script" path="res://Scripts/start_menu.cs" id="1_3nvp2"]
-[ext_resource type="Texture2D" uid="uid://bp4wli4ydky5w" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_4nfu3"]
 [ext_resource type="PackedScene" uid="uid://jr1muxwi0odv" path="res://scenes/Levels/forrest.tscn" id="2_b1n4x"]
 [ext_resource type="Texture2D" uid="uid://cdjlnvycodly8" path="res://Assets/UI/Button.png" id="2_ipsv1"]
+[ext_resource type="PackedScene" uid="uid://cd02lsuxkbj64" path="res://scenes/background.tscn" id="4_cjjc1"]
+[ext_resource type="AudioStream" uid="uid://b5qust8aekb35" path="res://Assets/SFX/JDSherbert - Ambiences Music Pack - Cosmic Star.wav" id="5_4fqdg"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -15,12 +16,8 @@ grow_vertical = 2
 script = ExtResource("1_3nvp2")
 _levelOne = ExtResource("2_b1n4x")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="Background" type="Sprite2D" parent="ParallaxBackground"]
-scale = Vector2(2.41458, 2.41912)
-texture = ExtResource("1_4nfu3")
-centered = false
+[node name="Background" parent="." instance=ExtResource("4_cjjc1")]
+scale = Vector2(2.38736, 2.38736)
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -29,27 +26,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -103.0
-offset_right = -8.0
-offset_bottom = -71.0
+offset_left = -59.0
+offset_top = -66.0
+offset_right = -27.0
+offset_bottom = -34.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4.35082, 4.35082)
 
 [node name="StartButton" type="TextureButton" parent="Buttons"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("2_ipsv1")
 
 [node name="Label" type="Label" parent="Buttons/StartButton"]
-layout_mode = 0
-offset_left = 5.05653
-offset_top = 2.29842
-offset_right = 45.0565
-offset_bottom = 28.2984
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.1733
+offset_top = -13.0121
+offset_right = 28.8267
+offset_bottom = 12.9879
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.537672, 0.537672)
 text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="QuitButton" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_ipsv1")
+
+[node name="Label" type="Label" parent="Buttons/QuitButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.1733
+offset_top = -13.0121
+offset_right = 28.8267
+offset_bottom = 12.9879
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.537672, 0.537672)
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4fqdg")
+autoplay = true
+
 [connection signal="pressed" from="Buttons/StartButton" to="." method="OnStartPressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="OnQuitPressed"]

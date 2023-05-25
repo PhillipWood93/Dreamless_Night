@@ -2,23 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bp4wli4ydky5w" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_10d78"]
 
-[sub_resource type="Animation" id="Animation_m4jim"]
-resource_name = "scroll"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background1:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-480, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_fbrhn"]
 length = 0.001
 tracks/0/type = "value"
@@ -32,6 +15,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m4jim"]
+resource_name = "scroll"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-480, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sm4gp"]

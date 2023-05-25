@@ -19,4 +19,9 @@ public partial class start_menu : Control
 	{
 		GetTree().ChangeSceneToPacked(_levelOne);
 	}
+
+	public void OnQuitPressed()
+	{
+		GetTree().Quit();
+	}
 }

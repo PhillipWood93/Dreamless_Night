@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dreamless_night"
-run/main_scene="res://scenes/Levels/forrest.tscn"
+run/main_scene="res://scenes/UI/start_menu.tscn"
 config/features=PackedStringArray("4.0", "C#", "Mobile")
 config/icon="res://icon.svg"
 
