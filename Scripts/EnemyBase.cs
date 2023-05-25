@@ -29,8 +29,8 @@ public partial class EnemyBase : CharacterBody2D
 	private Area2D _detectionZone;
 	private Area2D _attackZone;
 
-	private AnimationTree _animTree;
-	private AnimationNodeStateMachinePlayback _stateMachine;
+	protected AnimationTree _animTree;
+	protected AnimationNodeStateMachinePlayback _stateMachine;
 
 	private AudioStreamPlayer _audioPlayer;
     private Vector2 velocity;
@@ -49,6 +49,9 @@ public partial class EnemyBase : CharacterBody2D
 		_detectionZone.BodyExited += StopAttack;
 
 		_attackZone = (Area2D)GetNode("Sprite2D/AttackZone");
+		//so the player will not take damage when first spotted, and only the anim notify will deal damage.
+		_attackZone.Monitoring = false;
+		_attackZone.Monitorable = false;
 		_attackZone.BodyEntered += OnAttack;
 
 		_animTree = (AnimationTree)GetNode("AnimationTree");
@@ -78,7 +81,7 @@ public partial class EnemyBase : CharacterBody2D
 		}
     }
 
-	private void StartAttack(Node2D body)
+	public virtual void StartAttack(Node2D body)
 	{
 		if(body.Name == "Player" && !_isDead)
 		{
@@ -87,7 +90,7 @@ public partial class EnemyBase : CharacterBody2D
 		}
 	}
 
-	private async void StopAttack(Node2D body)
+	public virtual async void StopAttack(Node2D body)
 	{
 		if(body.Name == "Player")
 		{
@@ -98,7 +101,7 @@ public partial class EnemyBase : CharacterBody2D
 		}
 	}
 
-	private void OnAttack(Node2D other)
+	public virtual void OnAttack(Node2D other)
 	{
 		if(other.Name == "Player")
 		{
@@ -135,9 +138,14 @@ public partial class EnemyBase : CharacterBody2D
 		}
 	}
 
-    private void OnScreenExited()
+    public virtual void OnScreenExited()
 	{
-		//this.QueueFree();
+		
+	}
+
+	public virtual void OnScreenEnter()
+	{
+
 	}
 
 }

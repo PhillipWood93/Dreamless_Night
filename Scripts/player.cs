@@ -48,6 +48,7 @@ public partial class player : CharacterBody2D
 
 		_hud = (Hud)GetNode("Hud");
 		_hud.UpdateHealthBar(_health.health);
+		_hud.PlayTranstionIn();
     }
 
     public override void _Process(double delta)
@@ -62,6 +63,10 @@ public partial class player : CharacterBody2D
 		if (Input.IsActionPressed("quit"))
 		{
 			GetTree().Quit();
+		}
+		if (Position.X < 0)
+		{
+			Position = new Vector2(0, Position.Y);
 		}
     }
 

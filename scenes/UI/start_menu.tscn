@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://rxr8d01avnk8"]
+
+[ext_resource type="Script" path="res://Scripts/start_menu.cs" id="1_3nvp2"]
+[ext_resource type="Texture2D" uid="uid://bp4wli4ydky5w" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_4nfu3"]
+[ext_resource type="PackedScene" uid="uid://jr1muxwi0odv" path="res://scenes/Levels/forrest.tscn" id="2_b1n4x"]
+[ext_resource type="Texture2D" uid="uid://cdjlnvycodly8" path="res://Assets/UI/Button.png" id="2_ipsv1"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3nvp2")
+_levelOne = ExtResource("2_b1n4x")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground"]
+scale = Vector2(2.41458, 2.41912)
+texture = ExtResource("1_4nfu3")
+centered = false
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -103.0
+offset_right = -8.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4.35082, 4.35082)
+
+[node name="StartButton" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("2_ipsv1")
+
+[node name="Label" type="Label" parent="Buttons/StartButton"]
+layout_mode = 0
+offset_left = 5.05653
+offset_top = 2.29842
+offset_right = 45.0565
+offset_bottom = 28.2984
+scale = Vector2(0.537672, 0.537672)
+text = "Start"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Buttons/StartButton" to="." method="OnStartPressed"]

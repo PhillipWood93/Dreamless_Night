@@ -289,7 +289,6 @@ scale = Vector2(1.96, 2.92)
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_iyakw")
 hframes = 6
-frame = 1
 
 [node name="DetectZone" parent="Sprite2D" index="0"]
 position = Vector2(-82.9999, 31.0004)

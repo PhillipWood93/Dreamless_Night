@@ -41,10 +41,13 @@ public partial class portal : Area2D
 		}
 	}
 
-    public void OnBodyEntered(Node2D body)
+    public async void OnBodyEntered(Node2D body)
 	{
 		if (body.Name == "Player")
 		{
+			//play transition out...
+			Hud h = (Hud)body.GetNode("Hud");
+			await h.PlayTranstionOut();
 			GetTree().ChangeSceneToPacked(SceneToTranstion);
 		}
 	}

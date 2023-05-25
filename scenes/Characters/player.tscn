@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://gdaav88j1kvn" path="res://scenes/UI/hud.tscn" id="10_yvt7y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v32c1"]
-height = 48.0
+height = 44.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s1nlv"]
 animation = &"Attack"
@@ -1079,7 +1079,7 @@ texture = ExtResource("1_rn7mf")
 hframes = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_v32c1")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,193 @@
+[gd_scene load_steps=16 format=3 uid="uid://bog2vj23u8h51"]
+
+[ext_resource type="PackedScene" uid="uid://dib4vpmq0bwaa" path="res://scenes/Characters/Enemies/enemy_base.tscn" id="1_d8w6f"]
+[ext_resource type="Script" path="res://Scripts/Boar.cs" id="2_w1lm6"]
+[ext_resource type="Texture2D" uid="uid://3gmyr13w6466" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet-export-Back.png" id="3_sspiv"]
+[ext_resource type="Texture2D" uid="uid://dqp6jhx2q0tar" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet-Black.png" id="4_3o0xt"]
+
+[sub_resource type="Animation" id="Animation_eq4mp"]
+resource_name = "idle"
+length = 0.65
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boar/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sspiv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boar/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boar/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_olcvn"]
+resource_name = "run"
+length = 0.55
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boar/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_3o0xt")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boar/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boar/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_d5xcp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boar/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_sspiv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Boar/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Boar/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fk3q"]
+_data = {
+"RESET": SubResource("Animation_d5xcp"),
+"idle": SubResource("Animation_eq4mp"),
+"run": SubResource("Animation_olcvn")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_naljy"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_po7vt"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sgljl"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jtmhd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhdda"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kegkx"]
+states/idle/node = SubResource("AnimationNodeAnimation_naljy")
+states/idle/position = Vector2(349, 100)
+states/run/node = SubResource("AnimationNodeAnimation_po7vt")
+states/run/position = Vector2(477, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_sgljl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_jtmhd"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_vhdda")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_tok2q"]
+
+[node name="Boar" instance=ExtResource("1_d8w6f")]
+script = ExtResource("2_w1lm6")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-2, 0)
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_sspiv")
+hframes = 4
+
+[node name="DetectZone" parent="Sprite2D" index="0"]
+position = Vector2(-29, 8)
+
+[node name="AttackZone" parent="Sprite2D" index="1"]
+position = Vector2(-29, 8)
+
+[node name="TurnAroundNotify" parent="Sprite2D" index="2"]
+position = Vector2(-21, 15)
+monitoring = false
+monitorable = false
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_6fk3q")
+}
+
+[node name="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeStateMachine_kegkx")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_tok2q")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="6"]
+position = Vector2(-1, -2.98023e-08)
+scale = Vector2(2.05, 2.025)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnScreenEnter"]
