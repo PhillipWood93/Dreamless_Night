@@ -1568,13 +1568,14 @@ position = Vector2(13, 370)
 [node name="ShadowPortal" parent="." instance=ExtResource("6_bx36h")]
 position = Vector2(2951, 311)
 
-[node name="Boar" parent="." instance=ExtResource("7_8ymmk")]
-position = Vector2(1380, 390)
-
-[node name="Heart" parent="." instance=ExtResource("6_o6kqe")]
-position = Vector2(1814, 334)
-
 [node name="Ghost" parent="." instance=ExtResource("5_s05jm")]
 position = Vector2(2658, 383)
 
+[node name="Heart" parent="." instance=ExtResource("6_o6kqe")]
+position = Vector2(1812, 340)
+
+[node name="Boar" parent="." instance=ExtResource("7_8ymmk")]
+position = Vector2(1306, 386)
+
+[connection signal="Gameover" from="Player" to="Hud" method="OnGameOver"]
 [connection signal="HealthChanged" from="Player" to="Hud" method="OnHealthChanged"]

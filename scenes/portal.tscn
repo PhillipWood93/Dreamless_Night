@@ -289,6 +289,8 @@ attractor_interaction_enabled = false
 
 [node name="Portal" type="Area2D"]
 scale = Vector2(4, 4)
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_tkrgq")
 _isSpawner = false
 _randomSpawn = false

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyyq24gswjmro"]
+
+[ext_resource type="Script" path="res://Scripts/GameOver.cs" id="1_qvyex"]
+[ext_resource type="Texture2D" uid="uid://cdjlnvycodly8" path="res://Assets/UI/Button.png" id="2_k4sj5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y5qys"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qvyex")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0352941, 0.0352941, 0.0352941, 0.592157)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="PlayAgainButton" type="TextureButton" parent="CenterContainer/ButtonContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture_normal = ExtResource("2_k4sj5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/ButtonContainer/PlayAgainButton"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 40.0
+text = "Try Again"
+label_settings = SubResource("LabelSettings_y5qys")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="QuitButton" type="TextureButton" parent="CenterContainer/ButtonContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+texture_normal = ExtResource("2_k4sj5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CenterContainer/ButtonContainer/QuitButton"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 16.0
+offset_right = 69.0
+offset_bottom = 42.0
+text = "Quit
+"
+
+[connection signal="pressed" from="CenterContainer/ButtonContainer/PlayAgainButton" to="." method="OnPlayAgain"]
+[connection signal="pressed" from="CenterContainer/ButtonContainer/QuitButton" to="." method="OnQuit"]

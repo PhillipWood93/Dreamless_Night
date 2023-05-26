@@ -7,6 +7,9 @@ public partial class player : CharacterBody2D
 	[Signal]
 	public delegate void HealthChangedEventHandler(float health);
 
+	[Signal]
+	public delegate void GameoverEventHandler(bool didWin);
+
 	[ExportSubgroup("Movement")]
 	[Export] 
 	public float Speed = 300.0f;
@@ -144,6 +147,7 @@ public partial class player : CharacterBody2D
 		if(_health.health <= 0)
 		{
 			Die();
+			
 		}
         EmitSignal(SignalName.HealthChanged, _health.health);
     }
@@ -154,6 +158,7 @@ public partial class player : CharacterBody2D
 		_animTree.Set("parameters/conditions/isdead", _isDead);
 		await ToSignal(_animTree, AnimationTree.SignalName.AnimationFinished);
 		ProcessMode = ProcessModeEnum.Disabled;
-		//TODO: Show GameOver Screen...
-	}
+        EmitSignal(SignalName.Gameover, false);
+        //TODO: Show GameOver Screen...
+    }
 }

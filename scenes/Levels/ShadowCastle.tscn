@@ -874,19 +874,20 @@ layer_0/tile_data = PackedInt32Array(0, 262144, 6, 1, 327680, 6, 2, 393216, 6, 3
 [node name="Player" parent="." instance=ExtResource("2_w8t8v")]
 position = Vector2(96, 173)
 
-[node name="Heart" parent="." instance=ExtResource("3_3s6d8")]
-position = Vector2(346, 174)
-
 [node name="Muic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_nfnle")
 volume_db = -15.0
 autoplay = true
 
-[node name="Demon" parent="." instance=ExtResource("5_xbj50")]
-position = Vector2(583, 121)
-
 [node name="EarthPortal" parent="." instance=ExtResource("6_udqoc")]
 position = Vector2(730, 147)
 SceneToTranstion = ExtResource("7_irkd2")
 
+[node name="Demon" parent="." instance=ExtResource("5_xbj50")]
+position = Vector2(553, 131)
+
+[node name="Heart" parent="." instance=ExtResource("3_3s6d8")]
+position = Vector2(369, 176)
+
+[connection signal="Gameover" from="Player" to="Hud" method="OnGameOver"]
 [connection signal="HealthChanged" from="Player" to="Hud" method="OnHealthChanged"]
